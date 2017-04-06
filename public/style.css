@@ -1,0 +1,175 @@
+body {
+    background-color: #F8F8F9;
+}
+
+.logotype-text {
+    font-family: Futura;
+    font-size: 60px;
+    color: #373737;
+    user-select: none;
+    cursor: pointer;
+}
+
+.menu {
+    line-height: 75px;
+}
+
+.menu a {
+    margin-right: 40px;
+    font-family: Signika;
+    color: #575757;
+}
+
+.search-bar {
+    height: 40px;
+    background-color: #F1F1F1;
+    width: 250px;
+    border: none;
+    padding: 0 10px;
+    font-family: Signika;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+}
+
+.gap {
+    margin-bottom: 15px;
+}
+
+.drop-shadow {
+    -webkit-box-shadow: 0px 2px 7px -1px rgba(230,230,230,0.47);
+    -moz-box-shadow: 0px 2px 7px -1px rgba(230,230,230,0.47);
+    box-shadow: 0px 2px 7px -1px rgba(230,230,230,0.47);
+}
+
+.profile-badge {
+    background-color: #FBFBFB;
+    width: 250px;
+    height: 100px;
+}
+
+.profile-badge .profile-image {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    margin-top: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+}
+
+.profile-badge .profile-info {
+    float: right;
+    width: calc(100% - 80px);
+    font-family: Signika;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.profile-badge .profile-image img {
+    width: 50px;
+    height: 50px;
+}
+
+.profile-badge .profile-info .profile-name {
+    font-size: 20px;
+    display: block;
+}
+
+.profile-badge .profile-info .profile-readers {
+    font-size: 11px;
+    color: #999999;
+    float: left;
+}
+
+.profile-badge .profile-info .profile-location {
+    font-size: 11px;
+    color: #999999;
+    float: right;
+}
+
+.new-post {
+    width: 600px;
+    border: none;
+    height: 40px;
+    transition: height 0.3s;
+}
+
+textarea {
+    resize: none;
+}
+
+.new-post-input {
+    width: 100%;
+    background-color: #fff;
+    border: none;
+    height: 100%;
+    padding: 0 50px 0 20px;
+    font-family: Signika;
+    letter-spacing: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: height 0.3s;
+}
+
+.new-post-input.has-text:first-line {
+    font-weight: bold;
+}
+
+.new-post-input.passive {
+    cursor: pointer;    
+}
+
+.new-post-input.active {
+    height: 100px;
+}
+
+.new-post-control {
+    position: absolute;
+    left: 580px;
+    top: 10px;
+}
+
+.new-post-submit {
+    width: 80px;
+    font-family: Signika;
+    height: 40px;
+    float: right;
+    line-height: 40px;
+    text-align: center;
+    color: #000;
+    border-radius: 20px;
+    opacity: 0.7;
+    transition: color 0.2s;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+
+.new-post-submit:hover {
+    background: linear-gradient(141deg, #9e0a81 , #f6a77b);/* Standard syntax */
+    color: #fff;
+    cursor: pointer;
+}
+
+.new-post-submit span {
+
+    margin-right: 5px;
+}
+
+.new-post-submit span,
+.new-post-submit i {
+    z-index: 5;
+}
+
+.feed {
+    width: 600px;
+    height: calc(100vh - 150px);
+    background-color: #fff;
+    margin-top: 15px;
+    overflow: scroll;
+}

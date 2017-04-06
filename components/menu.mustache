@@ -1,0 +1,13 @@
+<div class="menu">
+    {{#data}}
+        {{^admin}}
+            <a href="{{link}}">{{name}}</a>
+        {{/admin}}
+        {{#admin}}
+            {{#user.admin}}
+                <a href="{{link}}">{{name}}</a>
+            {{/user.admin}}
+        {{/admin}}
+    {{/data}}
+</div>
+

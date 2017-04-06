@@ -1,0 +1,23 @@
+@font-face {
+    font-family: Futura; /* Имя шрифта */
+    src: url(futura.otf); /* Путь к файлу со шрифтом */
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Signika;
+    src: url(signika.otf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Signika;
+    src: url(signika-light.otf);
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: Signika;
+    src: url(signika-bold.otf);
+    font-weight: bold;
+}
