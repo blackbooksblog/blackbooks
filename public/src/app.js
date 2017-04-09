@@ -1,10 +1,29 @@
-window.$ = require('jquery');
+window.$ = window.jQuery = require('jquery');
 
-var Component = require('./component');
+require('bootstrap');
+require('./style.css');
+require('../styles/');
+require('./deps/summernote');
 
-Component.load('logo').apply($('.place-logo'));
-Component.load('menu').apply($('.place-menu'));
-Component.load('search').apply($('.place-search'));
-Component.load('badge').apply($('.place-badge'));
-Component.load('create').apply($('.place-create'));
-Component.load('feed').apply($('.place-feed'));
+window.Vue = require('vue').default;
+require('vue-resource');
+
+let Modal = require('./modal');
+
+setTimeout(_ => {
+    $('body').addClass('stop-scrolling');
+
+    $('.feed').on('wheel', e => {
+        e.stopPropagation();
+    })
+
+    $(window).on('wheel', e => {
+        let delta = e.originalEvent.deltaY;
+        $('.feed').scrollTop($('.feed').scrollTop() + delta);
+    })
+}, 200);
+
+let services = require('./services');
+
+window.services = services;
+window.services.load();

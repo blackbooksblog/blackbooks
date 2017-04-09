@@ -1,0 +1,86 @@
+.new-post {
+    width: 585px;
+    border: none;
+    height: 40px;
+    transition: height 0.2s;
+}
+
+.new-post form {
+    position: relative;
+}
+
+textarea {
+    resize: none;
+}
+
+.new-post-input {
+    width: 100%;
+    background-color: #fff;
+    border: none;
+    height: 40px;
+    padding: 0 50px 0 20px;
+    font-family: Signika;
+    letter-spacing: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.new-post-content {
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 5px;
+    border: none;
+    padding: 20px;
+    font-family: Signika;
+    letter-spacing: 1px;
+    transition: height 0.2s;
+    background: white;
+}
+
+.new-post-editor {
+    width: 100%;
+    min-height: 100px;
+}
+
+.new-post-input.passive {
+    cursor: pointer;    
+}
+
+.new-post-control {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+.new-post-submit {
+    width: 80px;
+    font-family: Signika;
+    height: 40px;
+    float: right;
+    line-height: 40px;
+    text-align: center;
+    color: #ccc;
+    border-radius: 20px;
+
+    transition: color 0.2s;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+
+.new-post-submit:hover {
+     background: linear-gradient(141deg, #9e0a81 , #f6a77b);/* Standard syntax */
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.new-post-submit span {
+
+    margin-right: 5px;
+}
+
+.new-post-submit span,
+.new-post-submit i {
+    z-index: 5;
+}

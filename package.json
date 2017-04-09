@@ -4,21 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "node --harmony server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
     "bootstrap": "^3.3.7",
+    "bootstrap-wysiwyg": "^2.0.1",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "error": "^7.0.2",
     "express": "^4.15.2",
+    "express-fileupload": "^0.1.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "mustache-express": "^1.2.4",
+    "node-time-ago": "^1.0.0",
     "nodemon": "^1.11.0",
     "rfr": "^1.2.3",
-    "then-mongo": "^2.3.2"
+    "then-mongo": "^2.3.2",
+    "uuid": "^3.0.1"
   }
 }

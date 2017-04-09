@@ -1,0 +1,36 @@
+<div class="single-post drop-shadow" postid="{{post._id}}">
+    <div class="post-header">
+        <div class="post-date">{{post.date}}</div>
+    </div>
+
+    <div class="post-editable">
+    <div class="post-title">{{post.title}}</div>
+
+    
+
+    <div class="post-body">
+        {{& post.body}}
+    </div>
+    </div>
+    {{#post.picture}}
+    <div class="post-image">
+        
+        <img src="/api/images/{{post.picture}}"></img>
+
+    </div>
+    {{/post.picture}}
+
+    <hr>
+
+    <div class="post-dialog">
+        <i class="fa fa-share post-share post-icon" aria-hidden="true"></i>
+
+        {{#user.admin}}
+        <i class="fa fa-pencil post-icon post-edit" aria-hidden="true"></i>
+        <i class="fa fa-trash post-icon post-delete" aria-hidden="true"></i>
+
+        <span style="display: none" class="post-commit">Save Changes</span>
+        <span style="display: none" class="post-cancel">Cancel</span>
+        {{/user.admin}}
+    </div>
+</div>

@@ -1,27 +1,52 @@
-function Component(promise, name) {
+function Component(promise, name, options) {
     this.promise = promise;
     this.name = name;
+    this.options = Object.assign({}, {
+        css: name 
+    }, options);
 }
 
 const components = require('./components');
 
-Component.load = function(componentName) {
-    return new Component($.get('/api/render/' + componentName), componentName);
+Component.instances = [];
+
+Component.load = function(componentName, options) {
+
+    return new Component(Vue.http.get('/api/render/' + componentName), componentName, options);
 }
 
 Component.prototype.apply = function (element) {
-    this.promise.then((html) => {
+    this.promise.then((res) => {
+        let html = res.body;
         let newElem = $(html);
+        element.empty();
         element.append(newElem);
+        element.attr('loaded', true);
         this.js(newElem);
+        setTimeout(_ => window.services.load());
     })
 };
 
 Component.prototype.js = function (el) {
     if (components[this.name]) {
         let constructor = components[this.name];
-        let instance = new constructor(el);
+        let injects = constructor.inject || [];
+
+        injects = injects.map ((name) => {
+            return require('./injectable')[name];
+        });
+
+        if (el.hasClass('display-false')) {
+            return;
+        }
+        let instance = new constructor(el, ...injects);
+        Component.instances.push(instance);
     }
+}
+
+Component.deinitAll = function () {
+    let main = window.services.load.main;
+    $(`[place="${main}"]`).empty();
 }
 
 module.exports = Component;

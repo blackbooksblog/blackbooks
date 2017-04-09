@@ -1,89 +1,134 @@
+let filePicker = require('./file-picker');
+
 module.exports = class CreateComponent {
-    constructor($) {
 
+    static get inject() {
+        return ['modal'];
+    }
+
+    getIsEditing(el) {
+        return el.find('div.note-editable').is(':focus')
+    }
+
+    constructor($, Modal) {
+        this.filepicker = filePicker($.find('.file-picker'));
+        this.Modal = Modal;
         this.$ = $;
-        setTimeout(_ => this.setupEvents(), 0)
-        this.state = {
-            text: ""
-        };
+        setTimeout(_ => this.setupEvents(), 0);
     }
 
-    revertState(e) {
-        if (e.key == 'Backspace') {
-            return false;
-        }
-        e.preventDefault();
-        return true;
+    setupTryBlur() {
+        $('.new-post-editor').summernote({
+                airMode: true, 
+                minHeight: '100px',
+                callbacks: {
+                    onFocus: _ => {
+                        if (this.hint) {
+                            this.hint.detach();
+                            this.hint = null;
+                        }
+                    }
+                }
+        });
     }
 
-    setState(newState, e) {
-        let newText = newState.text;
-        let reverted = newText.length > 3000 && this.revertState(e);
-            
-        if (reverted) {
+    tryBlur() {
+        this.$.css({
+            height: 40
+        })
+        this.$.find('.new-post-submit').addClass('hide');
+        this.input.addClass('passive');
+        this.input.removeClass('active');
+        this.input.attr('placeholder', 'Post something new...');
+        this.area.addClass('hide');
+        this.a = null;
+    }
+
+    editor() {
+        return this.$.find('.new-post-editor');
+    }
+
+    onEditorOpen() {
+        this.$.find('.new-post-input').focus();
+        
+        if (!this.editor().summernote('isEmpty')) {
             return;
         }
-        
-        this.state = newState;
+        this.createHint();
+    }
+
+    createHint() {
+        let offset = $('.new-post-editor').next().offset();
+        if (this.hint) {
+            this.hint.detach();
+        }
+        this.hint = $('<p class="hint-text"></p>').css({
+            position: "absolute",
+            top: offset.top ,
+            left: offset.left ,
+        });
+        this.hint.text('Post text goes here. Double click on typed text for options');
+        this.hint.appendTo(this.a.blackWindow());
+        this.hint.on('click', () => {
+            this.hint.detach();
+            this.hint = null;
+            this.$.find('.new-post-editor').summernote('focus');
+        })
+    }
+
+    getTitle() {
+        return this.$.find('.new-post-input').val();
+    }
+
+    getBody() {
+        return this.$.find('.new-post-editor').summernote('code');
     }
 
     setupEvents() {
         let input = this.$.find('.new-post-input');
-
-        input.on('click', () => {
-            input.addClass('active');
-            input.removeClass('passive');
-            this.$.find('.new-post-submit').removeClass('hide');
-            this.$.css({
-                height: 100
-            })
-            input.attr('placeholder', 'Article title?');
-        });
-
-        input.on('blur', () => {
-            if (input.val()) {
+        this.input = input;
+        let area = this.$.find('.new-post-content');
+        this.area = area;
+        this.$.on('click', () => {
+            if (this.a) {
                 return;
             }
+            let Modal = this.Modal;
+            this.a = new Modal($('.place-create'));
+            this.a.launch();
+            this.a.onClose = _ => this.tryBlur();
+            this.a.onOpen = _ => this.onEditorOpen();
+            this.$.find('.new-post-submit').removeClass('hide');
             this.$.css({
-                height: 40
+                height: 140
             })
-            this.$.find('.new-post-submit').addClass('hide');
-            input.addClass('passive');
-            input.removeClass('active');
-            input.attr('placeholder', 'Post something new...');
+            input.attr('placeholder', 'Article title?');
+            this.area.removeClass('hide');
         });
 
-        input.on('keydown', ($e) => {
-            this.setState({
-                text: input.val()
-            }, $e);
+        this.$.find('.new-post-content').on('click', (e) => {
+            if ($(e.originalEvent.target).hasClass('new-post-content')) {
+                this.$.find('.new-post-editor').summernote('focus');
+            }
         })
 
-        input.on('keyup', () => {
-
-            setTimeout(_ => input.val() ? input.addClass('has-text') : input.removeClass('has-text'), 20);
-                
-            
-
-            let lines = input.val().split('\n').length;
-            
-            if (lines < 3) {
-                this.$.css({
-                    height: 100
-                });
-                return input.css({
-                    height: ""
-                });
-            }
-            else {
-                this.$.css({
-                    height: 100 + 20 * (lines - 3)
-                });
-                return input.css({
-                    height: 100 + 20 * (lines - 3)
-                });
-            }
-
+        this.$.find('.new-post-submit').on('click', (e) => {
+            let title = this.getTitle();
+            let body = this.getBody();
+            services.post.submit(title, body, _ => {
+                this.input.val('');
+                this.$.find('.new-post-editor').summernote('empty');
+                this.createHint();
+                setTimeout(_ => this.a && this.a.destroyModal(), 2000);
+            })
         })
+
+        setTimeout(_ => this.setupTryBlur(), 500);
+
+        
+    }
+
+    deinit() {
+        this.$.detach();
     }
 }

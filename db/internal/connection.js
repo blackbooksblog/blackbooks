@@ -6,4 +6,15 @@ var collections = [
     'users',
 ];
 
-module.exports = mongo(config.MONGO_URL, collections);
+let conn = mongo(config.MONGO_URL, collections);
+
+String.prototype.toObjectId = function () {
+
+    try {
+        return new conn.ObjectId(this.toString());
+    } catch(e) {
+        return null;
+    }
+}
+
+module.exports = conn;

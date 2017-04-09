@@ -1,0 +1,9 @@
+.menu {
+    line-height: 75px;
+}
+
+.menu a {
+    margin-right: 40px;
+    font-family: Signika;
+    color: #42404b;
+}

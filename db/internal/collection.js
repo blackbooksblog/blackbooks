@@ -1,9 +1,6 @@
-var Entity = require('./../index')
-
-console.log(Entity);
-
 module.exports = class Collection {
     constructor(conn) {
+
         this.conn = conn;
     }
 
@@ -13,11 +10,19 @@ module.exports = class Collection {
         return this.conn[collection].insert(entity.src);
     }
 
+    async count (entity) {
+        let collection = entity.collectionName;
+        return await this.conn[collection].count();
+    }
+
     updateEntity(entity) {
+
         let collection = entity.collectionName;
 
-        return this.conn[collecton].update({
-            _id: this.entity.src._id 
+        
+
+        return this.conn[collection].update({
+            _id: entity.src._id 
         }, entity.src);
     }
 
@@ -38,17 +43,25 @@ module.exports = class Collection {
         return cursor;
     }
 
-    allPopulated(type, opts) {
-        let cursor = this.all(type, opts);
+    byId(type, id) {
+        return this.conn[type.collectionName].findOne({_id: id});
+    }
 
-        return cursor.then((records) => {
-            // console.log(records);
-            console.log(Entity);
-            try {
-                return records.map((rec) => Entity.fromJSON(rec, type));
-            } catch (e) {
-                console.log(e);
-            }
-        });
+    find(entity, query) {
+        return this.all(entity, {query});
+    }
+
+    async findOne(entity, query) {
+        let results = await this.find(entity, query);
+        return results[0];
+    }
+
+    async findOnePopulate(entity, query) {
+        let res = await this.findOne(entity, query);
+        return res && new entity(res) || null;
+    }
+
+    async count(entity, query) {
+        return await this.conn[entity.collectionName].count(query);
     }
 }

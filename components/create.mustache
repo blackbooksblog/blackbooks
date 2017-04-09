@@ -1,11 +1,22 @@
+{{#user.admin}}
 <div class="new-post drop-shadow">
-    <textarea class="new-post-input passive" placeholder="Post something new..."></textarea>
+    <form>
+    <input class="new-post-input" placeholder="Post something new..."></input>
+
+    <div class="new-post-content hide" placeholder="Post text goes here..">
+        <div class="new-post-editor"></div>
+    </div>
     
     <div class="new-post-control">
-        <i class="fa fa-camera" aria-hidden="true" style="color: #373737"></i>
+        <i class="fa fa-camera file-picker" aria-hidden="true" style="color: #373737"></i>
     </div>
 
     <div class="new-post-submit hide">
         <span>Post</span><i class="fa fa-paper-plane" aria-hidden="true"></i>
     </div>
+    </form>
 </div>
+{{/user.admin}}
+{{^user.admin}}
+<div class="new-post display-false"/>
+{{/user.admin}}

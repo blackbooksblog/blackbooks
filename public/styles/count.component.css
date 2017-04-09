@@ -1,0 +1,10 @@
+.count-post {
+    width: 585px;
+    border: none;
+    height: 40px;
+    transition: height 0.2s;
+    background-color: #fff;
+    line-height: 40px;
+    font-family: Signika;
+    text-align: center;
+}

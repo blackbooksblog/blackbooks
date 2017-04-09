@@ -1,0 +1,45 @@
+.profile-badge {
+    background-color: #FBFBFB;
+    width: 250px;
+    height: 100px;
+}
+
+.profile-badge .profile-image {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    margin-top: 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    float: left;
+}
+
+.profile-badge .profile-info {
+    float: right;
+    width: calc(100% - 80px);
+    font-family: Signika;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.profile-badge .profile-image img {
+    width: 50px;
+    height: 50px;
+}
+
+.profile-badge .profile-info .profile-name {
+    font-size: 20px;
+    display: block;
+}
+
+.profile-badge .profile-info .profile-readers {
+    font-size: 11px;
+    color: #999999;
+    float: left;
+}
+
+.profile-badge .profile-info .profile-location {
+    font-size: 11px;
+    color: #999999;
+    float: right;
+}

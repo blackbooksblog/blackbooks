@@ -1,0 +1,50 @@
+.single-post {
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+.post-header {
+    float: right;
+    display: inline;
+    font-family: Signika;
+    font-size: 12px;
+    font-weight: lighter;
+    color: #42404b;
+}
+
+.post-title {
+    font-family: Signika;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.post-image img {
+    max-width: 100%;
+}
+
+.post-body {
+    margin-top: 15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.post-dialog {
+    font-family: Signika;
+}
+
+.post-dialog span {
+    margin-right: 10px;
+}
+
+.post-icon {
+    margin-right: 5px;
+}
+
+.post-like {
+    color: #F33B3E;
+}
+
+.post-share {
+    color: #1D3C50;
+}

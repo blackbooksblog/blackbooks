@@ -1,0 +1,24 @@
+.place-feed {
+    overflow: hidden;
+    max-width: 600px;
+}
+
+.feed {
+    width: 615px;
+    padding-right: 15px;
+    height: 100vh;
+    margin-top: 15px;
+    overflow: scroll;
+    padding-bottom: 300px;
+}
+
+.feed-show-more {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    font-family: Signika;
+    background-color: #f0f2f5;
+    color: #507299;
+    text-align: center;
+    cursor: pointer;
+}

@@ -1,3 +1,6 @@
 module.exports = {
-    create: require('./create')
+    create: require('./create'),
+    feed: require('./feed'),
+    search: require('./search'),
+    auth: require('./auth')
 }
