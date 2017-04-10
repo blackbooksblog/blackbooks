@@ -17,7 +17,7 @@ app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
 
 app.use('/api', require('./routes'));
-
+app.use('/go', require('./site'));
 app.use(express.static('./public'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); 

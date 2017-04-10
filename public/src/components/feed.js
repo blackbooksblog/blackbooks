@@ -1,11 +1,16 @@
 let PostComponent = require('./post');
 
+let Feed = {};
+
+Feed.controllers = {};
+
 module.exports = class FeedComponent {
     static get inject() {
         return ['post'];
     }
 
     constructor ($, Post) {
+        console.log('feed construct');
         this.Post = Post;
         this.$ = $;
         this.offset = 0;
@@ -27,7 +32,6 @@ module.exports = class FeedComponent {
             this.renderShowMore(val);
         })
         services.store.get('posts').subscribe('old-post', val => {
-            console.log('-old-post');
             this.renderPost(val);
         })
         
@@ -56,40 +60,12 @@ module.exports = class FeedComponent {
              post = $('<div class="animated fadeIn">').attr('place', 'post-id' + id).attr('loaded', true);
              this.$.prepend(post);
         }
-        new PostComponent(post);
+       
         this.Post(id).apply(post);
     }
 
-    renderPostAuto(id) {
-        let post = $(`[place="post-id${id}"]`);
-        if (!post.length) {
-             post = $('<div>').attr('place', 'post-id' + id).attr("postid", id).attr('loaded', true);
-             
-             let posts = $('[postid]').toArray();
-             if (!posts.length) {
-                 post.prependTo(this.$);
-                 return this.Post(id).apply(post);
-             }
+    
 
-             posts.push(post[0]);
-
-             posts.sort((a,b) => {
-                 return $(a).attr('postid') > $(b).attr('postid');
-             });
-
-             let index = posts.indexOf(post[0]);
-             let nextPost = posts[index+1];
-
-             if (!nextPost) {
-                 post.prependTo(this.$);
-                 return this.Post(id).apply(post);
-             }
-
-             post.insertAfter($(nextPost));
-        }
-
-        this.Post(id).apply(post);
-    }
 
     renderPost(id) {
         let post = $(`[place="post-id${id}"]`);
@@ -103,7 +79,7 @@ module.exports = class FeedComponent {
              }
              
         }
-        new PostComponent(post);
+        
         this.Post(id).apply(post);
     }
 

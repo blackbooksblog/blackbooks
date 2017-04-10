@@ -15,7 +15,54 @@ post.submit =  (name, body, cb) => {
     });
 }
 
+post.update = (id, title, body) => {
+
+    console.log('post.update');
+
+    let object = {
+        _id: id, body, title 
+    };
+
+    return Vue.http.post('/api/posts/update', object).then(res => {
+        services.show.success('Changes Saved');
+    }).catch(err => {
+        services.show.error(err.body.error);
+    })
+}
+
+post.delete = (_id, cb = () => {}) => {
+
+    console.log('post.delete');
+
+    let object = {
+        _id
+    };
+
+    return Vue.http.post('/api/posts/delete', object).then(res => {
+        cb();
+    }).catch(err => {
+        services.show.error(err.body.error);
+    })
+}
+
+post.undoDelete = (_id, cb = () => {}) => {
+
+    console.log('post.undoDelete');
+
+    let object = {
+        _id
+    };
+
+    return Vue.http.post('/api/posts/undo-delete', object).then(res => {
+        cb();
+    }).catch(err => {
+        services.show.error(err.body.error);
+    })
+}
+
 post.get = (count, query) => {
+
+    console.log('get api');
 
     count = count || 5;
     return Vue.http.post('/api/posts/', {

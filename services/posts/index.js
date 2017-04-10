@@ -30,7 +30,8 @@ module.exports = class Posts {
         let older = await db.collection.find(db.entities.Post, Object.assign({}, query, {
             _id: {
                 $lt: post._id
-            }
+            },
+            deleted: {$exists: false}
         })).limit(count);
 
         return older;

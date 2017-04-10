@@ -1,4 +1,4 @@
-<div class="single-post drop-shadow" postid="{{post._id}}">
+<div class="single-post drop-shadow" postid="{{post._id}}" component="post">
     <div class="post-header">
         <div class="post-date">{{post.date}}</div>
     </div>
@@ -23,14 +23,23 @@
     <hr>
 
     <div class="post-dialog">
-        <i class="fa fa-share post-share post-icon" aria-hidden="true"></i>
-
+        <div class="post-share pointer post-action">
+            <i class="fa fa-share post-icon " aria-hidden="true"></i>
+            <span>Share</span>
+        </div>
         {{#user.admin}}
-        <i class="fa fa-pencil post-icon post-edit" aria-hidden="true"></i>
-        <i class="fa fa-trash post-icon post-delete" aria-hidden="true"></i>
+        <div class="pointer post-action post-edit ">
+            <i class="fa fa-pencil post-icon pointer" aria-hidden="true"></i>
+            <span>Edit</span>    
+        </div>
+        <div class="pointer post-action post-delete ">
+            <i class="fa fa-trash post-icon pointer" aria-hidden="true"></i>
+            <span>Delete</span>
+        </div>
 
-        <span style="display: none" class="post-commit">Save Changes</span>
-        <span style="display: none" class="post-cancel">Cancel</span>
+        <span style="display: none" class="post-commit pointer post-action">Save Changes</span>
+        <span style="display: none" class="post-cancel pointer post-action">Cancel</span>
         {{/user.admin}}
+        <span style="" class="post-go pointer post-action pull-right" showif="main">Go to post</span>
     </div>
 </div>

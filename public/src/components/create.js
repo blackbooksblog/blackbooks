@@ -94,7 +94,9 @@ module.exports = class CreateComponent {
                 return;
             }
             let Modal = this.Modal;
-            this.a = new Modal($('.place-create'));
+            this.a = new Modal($('.place-create'), {
+                exists: true 
+            });
             this.a.launch();
             this.a.onClose = _ => this.tryBlur();
             this.a.onOpen = _ => this.onEditorOpen();

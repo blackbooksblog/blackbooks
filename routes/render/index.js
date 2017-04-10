@@ -9,11 +9,9 @@ router.all('/:id', function (req, res) {
     return res.render(componentName, {
         user: req.user,
         data: [
-            {name: 'Home', link: '/home'},
-            {name: 'Books', link: '/books'},
-            {name: 'Writers', link:'/writers'},
-            {name: 'Links', link:'/links'},
-            {name: 'Admin Tools', link:'/admin', admin: true}
+            {name: 'Home', link: '/go/home'},
+            {name: 'Books', link: '/go/books'},
+            {name: 'Bio', link:'/go/bio'},
         ]
     });
 }.catchy());

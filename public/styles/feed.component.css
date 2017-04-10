@@ -21,4 +21,11 @@
     color: #507299;
     text-align: center;
     cursor: pointer;
+    margin-bottom: 15px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.feed-show-more:hover {
+    opacity: 1;
 }

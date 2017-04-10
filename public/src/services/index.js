@@ -5,5 +5,6 @@ module.exports = {
     reload: require('./reload'),
     load: require('./load-all-components'),
     file: require('./file'),
-    post: require('./post')
+    post: require('./post'),
+    share: require('./share')
 };

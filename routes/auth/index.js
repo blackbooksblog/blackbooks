@@ -26,4 +26,12 @@ router.all('/protected', authMiddleware.user, (req, res) => {
     });
 });
 
+router.all('/logout', authMiddleware.user, (req, res) => {
+    res.clearCookie('userid');
+    res.clearCookie('token');
+    res._json({
+        logout: true 
+    });
+}); 
+
 module.exports = router;

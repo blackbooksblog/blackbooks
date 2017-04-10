@@ -84,3 +84,7 @@ input:-webkit-autofill {
     background: red;
     position: absolute;
 }
+
+.pointer {
+    cursor: pointer;
+}

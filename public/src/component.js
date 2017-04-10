@@ -41,6 +41,21 @@ Component.prototype.js = function (el) {
         }
         let instance = new constructor(el, ...injects);
         Component.instances.push(instance);
+    } else {
+        let componentName = el.attr('component');
+        if (!componentName) return;
+        let constructor = components[componentName];
+        let injects = constructor.inject || [];
+
+        injects = injects.map ((name) => {
+            return require('./injectable')[name];
+        });
+
+        if (el.hasClass('display-false')) {
+            return;
+        }
+        let instance = new constructor(el, ...injects);
+        Component.instances.push(instance);
     }
 }
 

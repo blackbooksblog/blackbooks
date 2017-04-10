@@ -36,9 +36,25 @@ module.exports = class Entity {
         }
     }    
 
+    static async get(type, id) {
+        let objId = id.toObjectId();
+        let res = await collection.findOne(type, {_id: objId});
+        if (!res) {
+            return null;
+        }
+
+        console.log(type);
+
+        return new type(res);
+    }
+
     static fromJSON(json, type) {
-        Entity.match(json, type)
+        Entity.match(json, type);
         return new type(json);
+    }
+
+    async restore() {
+        await collection.restore(this);
     }
 
     static match(json, type) {

@@ -21,11 +21,65 @@ router.post('/create', adminOnly, async function (req, res){
     });
 }.catchy());
 
+router.post('/update', adminOnly, async function (req, res){
+    console.log('here');
+    
+    req.body.author = req.user._id.toString();
+    req.body.text = req.body.body;
+
+    let entity = Entity.fromJSON(req.body, Post);
+    
+
+    let post = await Entity.get(Post, entity.src._id);
+
+    if (!post) {
+        throw new Error('Post not found');
+    }
+
+    post.src.text = entity.src.body;
+    post.src.title = entity.src.title;
+
+    await post.save();
+    res._json({
+        _id: post.src._id 
+    });
+}.catchy());
+
+router.post('/delete', adminOnly, async function(req, res) {
+    let post = await Entity.get(Post, req.body._id);
+
+    if (!post) {
+        throw new Error('Post not found');
+    }
+
+    post.src.deleted = true;
+    await post.save();
+    res._json({
+        deleted: true 
+    })
+});
+
+router.post('/undo-delete', adminOnly, async function(req, res) {
+    let post = await Entity.get(Post, req.body._id);
+
+    if (!post) {
+        throw new Error('Post not found');
+    }
+
+    await post.restore();
+    res._json({
+        reverted: true 
+    })
+});
+
 router.post('/', async function(req, res) {
 
     let count = parseInt(req.body.count) || 5;
 
     let posts = await Collection.all(Post, {
+        query: {
+            deleted: {$exists: false}
+        },
         limit: count,
         sort: {
             $natural: -1
@@ -39,7 +93,9 @@ router.post('/', async function(req, res) {
 }.catchy());
 
 router.post('/count', async function(req, res) {
-    let count = await Collection.count(Post, {});
+    let count = await Collection.count(Post, {
+        deleted: {$exists: false}
+    });
 
     res._json({count: count});
 }.catchy());

@@ -14,10 +14,12 @@ user.login = function(login, password) {
 }
 
 user.logout = function() {
-    document.cookie = "userid=0";
-    services.show.success('See you later').after(() => {
-        services.reload();
-    });
+    Vue.http.post('/api/auth/logout').then(() => {
+        services.show.success('See you later').after(() => {
+            services.reload();
+        });
+    })
+    
 }
 
 user.register = function (login, password, name) {

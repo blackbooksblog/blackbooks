@@ -2,7 +2,8 @@ function Modal(el, options) {
     this.cb = _ => this.windowResizeCallback();
     this.options = {
         delay: 0.1,
-        opacity: 0.8
+        opacity: 0.8,
+        exists: true
     }
     this.options = Object.assign({}, this.options, options);
     this.$ = el;
@@ -11,7 +12,10 @@ function Modal(el, options) {
         width: this.$.width(),
         height: this.$.height()
     });
-    this.block.insertAfter(this.$);
+    if (this.options.exists) {
+        this.block.insertAfter(this.$);
+    }
+    
 }
 
 Modal.prototype.blackWindow = function () {
@@ -77,17 +81,29 @@ Modal.prototype.launch = function () {
     setTimeout(_ => this.blackWindow().css({
         'background-color': `rgba(0,0,0,${opacity})`
     }));
-    this.container().css({
-        left: this.$.offset().left,
-        top: this.$.offset().top
-    })
+    console.log(this.options.exists);
+    if (this.options.exists) {
+        this.container().css({
+            left: this.$.offset().left,
+            top: this.$.offset().top
+        })
+    } else {
+        this.container().css({
+            left: '50%',
+            top: '25%',
+            transform: 'translate(-50%, -50%)'
+        })
+    }
     this.container().append(this.$);
     setTimeout(_ => this.onOpen && this.onOpen(), this.options.delay * 1000);
     $(window).on('resize', this.cb);
 }
 
 Modal.prototype.destroyModal = function () {
-    this.$.insertAfter(this.block);
+    if (this.options.exists) {
+         this.$.insertAfter(this.block);
+    }
+   
     this.container().detach();
     this.blackWindow().detach();
     this.block.detach();

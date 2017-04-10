@@ -1,0 +1,14 @@
+.share-dialog{ 
+    padding: 5px;
+
+}
+.share-action {
+    width: 100%;
+    font-family: Signika;
+    height: 50px;
+    line-height: 50px;
+}
+
+.share-action span {
+    margin-left: 10px;
+}

@@ -15,15 +15,24 @@ module.exports = class Collection {
         return await this.conn[collection].count();
     }
 
+    async restore(entity) {
+        let collection = entity.collectionName;
+        await this.conn[collection].update({
+            _id: entity.src._id 
+        }, {
+            $unset: {
+                deleted: ''
+            }
+        });
+    }
+
     updateEntity(entity) {
 
         let collection = entity.collectionName;
 
-        
+        console.log(entity.src._id);
 
-        return this.conn[collection].update({
-            _id: entity.src._id 
-        }, entity.src);
+        return this.conn[collection].save(entity.src);
     }
 
     all(type, opts) {

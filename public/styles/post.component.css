@@ -31,6 +31,7 @@
 
 .post-dialog {
     font-family: Signika;
+    height: 25px;
 }
 
 .post-dialog span {
@@ -47,4 +48,23 @@
 
 .post-share {
     color: #1D3C50;
+}
+
+.post-action {
+    display: block;
+    float: left;
+    padding: 0 10px;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    color: #343c4a;
+    border-radius: 2px;
+}
+
+.post-action:hover {
+    background-color: #f0f2f5;
+}
+
+.post-go {
+    margin-right: 0 !important;
 }
