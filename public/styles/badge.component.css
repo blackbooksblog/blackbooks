@@ -43,3 +43,12 @@
     color: #999999;
     float: right;
 }
+
+.logout {
+    display: block;
+    width: 100px;
+    font-family: Signika;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 10px;
+}

@@ -3,5 +3,6 @@ module.exports = {
     feed: require('./feed'),
     search: require('./search'),
     auth: require('./auth'),
-    post: require('./post')
+    post: require('./post'),
+    badge: require('./badge')
 }
