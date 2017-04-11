@@ -4,5 +4,7 @@ module.exports = {
     search: require('./search'),
     auth: require('./auth'),
     post: require('./post'),
-    badge: require('./badge')
+    badge: require('./badge'),
+    bookcreate: require('./bookcreate'),
+    bookfeed: require('./bookfeed')
 }

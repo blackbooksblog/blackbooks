@@ -8,8 +8,9 @@ var posts = require('./posts');
 var render = require('./render');
 var images = require('./images');
 var auth = require('./auth');
+var books = require('./books');
 
-var routers = [posts, render, images, auth];
+var routers = [posts, render, images, auth, books];
 routers.map(r => {
     if (r.inject) {
         r.services = {};
@@ -25,6 +26,7 @@ router.use('/posts', posts);
 router.use('/render', render);
 router.use('/images', images);
 router.use('/auth', auth);
+router.use('/books', books);
 
 
 module.exports = router;

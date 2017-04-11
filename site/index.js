@@ -24,4 +24,8 @@ router.get('/home', (req, res) => {
     res.redirect('/');
 })
 
+router.get('/books', (req, res) => {
+    res.render('books');
+})
+
 module.exports = router;

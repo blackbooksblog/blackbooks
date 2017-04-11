@@ -1,4 +1,6 @@
-<div class="single-post drop-shadow" postid="{{post._id}}" component="post">
+
+
+<div class="single-post drop-shadow {{#post.link}}book-post{{/post.link}}" postid="{{post._id}}" component="post">
     <div class="post-header">
         <div class="post-date">{{post.date}}</div>
     </div>
@@ -20,8 +22,17 @@
     </div>
     {{/post.picture}}
 
-    <hr>
+    
 
+    
+
+    {{#post.link}}
+        <div class="purchase-block">
+            <a href="{{post.link}}" target="_blank" class="purchase-link">Purchase</a>
+        </div>
+    {{/post.link}}
+    {{^post.link}}
+    <hr>
     <div class="post-dialog">
         <div class="post-share pointer post-action">
             <i class="fa fa-share post-icon " aria-hidden="true"></i>
@@ -42,4 +53,5 @@
         {{/user.admin}}
         <span style="" class="post-go pointer post-action pull-right" showif="main">Go to post</span>
     </div>
+    {{/post.link}}
 </div>

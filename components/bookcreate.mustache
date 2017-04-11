@@ -1,0 +1,22 @@
+{{#user.admin}}
+<div class="new-post drop-shadow">
+    <form>
+    <input class="new-post-input" placeholder="Share a book..."></input>
+
+    <div class="new-post-content hide" placeholder="Book description goes here..">
+        <div class="new-post-editor"></div>
+    </div>
+    
+    <div class="new-book-control">
+        <span class="post-action book-attach-link" aria-hidden="true" style="color: #373737"><span class="text">Insert a buy link</span><i class="fa fa-check book-attach-ok" aria-hidden="true" style="display:none;"></i></span>
+    </div>
+
+    <div class="new-post-submit hide">
+        <span>Post</span><i class="fa fa-paper-plane" aria-hidden="true"></i>
+    </div>
+    </form>
+</div>
+{{/user.admin}}
+{{^user.admin}}
+<div class="new-post display-false"/>
+{{/user.admin}}

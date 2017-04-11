@@ -12,7 +12,9 @@ router.post('/create', adminOnly, async function (req, res){
         title: req.body.name,
         author: req.user._id.toString(),
         text: req.body.body,
-        picture: req.body.picture 
+        link: req.body.link,
+        picture: req.body.picture,
+        book: true 
     }, Post);
 
     await post.save();
@@ -21,9 +23,7 @@ router.post('/create', adminOnly, async function (req, res){
     });
 }.catchy());
 
-router.post('/update', adminOnly, async function (req, res){
-    console.log('here');
-    
+router.post('/update', adminOnly, async function (req, res){    
     req.body.author = req.user._id.toString();
     req.body.text = req.body.body;
 
@@ -49,7 +49,7 @@ router.post('/delete', adminOnly, async function(req, res) {
     let post = await Entity.get(Post, req.body._id);
 
     if (!post) {
-        throw new Error('Post not found');
+        throw new Error('Book not found');
     }
 
     post.src.deleted = true;
@@ -79,7 +79,7 @@ router.post('/', async function(req, res) {
     let posts = await Collection.all(Post, {
         query: {
             deleted: {$exists: false},
-            book: {$exists: false}
+            book: {$exists: true}
         },
         limit: count,
         sort: {

@@ -6,5 +6,6 @@ module.exports = {
     load: require('./load-all-components'),
     file: require('./file'),
     post: require('./post'),
-    share: require('./share')
+    share: require('./share'),
+    book: require('./book')
 };
