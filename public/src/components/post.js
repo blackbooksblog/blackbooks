@@ -1,5 +1,7 @@
 let Undo = require('./undo');
 let Share = require('./share');
+let FilePicker = require('./file-picker');
+let Overlay = require('./overlay');
 
 module.exports = class PostComponent {
     constructor (el) {
@@ -9,11 +11,63 @@ module.exports = class PostComponent {
         this.postEdit = this.postEdit.bind(this);
         this.postDelete = this.postDelete.bind(this);
         this.postCommit = this.postCommit.bind(this);
+        this.postAddImage = this.postAddImage.bind(this);
         this.postCancel = this.postCancel.bind(this);
         this.postShare = this.postShare.bind(this);
         this.postGo = this.postGo.bind(this);
+        this.changePostImage = this.changePostImage.bind(this);
         this.displayGo();
+        
     }
+
+    setupImageOverlay() {
+        this.imageOverlay.show();
+        this.imageOverlay.attachEditMode();
+
+        this.imageOverlay.onEdit(_ => {
+            this.postAddImage();
+        });
+
+        this.imageOverlay.onDelete(_ => {
+            this.deleteImage();
+        });
+
+    }
+
+    deleteImage() {
+        this.changePostImage(null);
+    }
+
+    displayImageOverlay() {
+        if (this.hasImage) {
+            this.setupImageOverlay();
+        }
+    }
+
+    hideImageOverlay() {
+        if (this.hasImage) {
+            this.imageOverlay.hide();
+        }
+    }
+
+    postAddImage () {
+        if (!this.FilePicker) {
+            let filepicker = FilePicker(this.$.find('.post-change-image'), {
+                noRedIcon: true,
+                onChange: this.changePostImage
+            });
+            this.FilePicker = filepicker;
+            
+        }
+
+        this.FilePicker.open();
+    }
+
+    changePostImage(id) {
+        console.log('change post image?');
+        services.post.changeImage(this.postId, id);
+    }
+
 
     displayGo () {
         if (location.pathname == "/") {
@@ -44,7 +98,10 @@ module.exports = class PostComponent {
         this.$.find('.post-commit').on('click', this.postCommit);
         this.$.find('.post-cancel').on('click', this.postCancel);
         this.$.find('.post-share').on('click', this.postShare);
+        this.$.find('.post-change-image').on('click', this.postAddImage);
         this.$.find('.post-go').on('click', this.postGo);
+        this.hasImage = this.$.find('.post-image').length > 0;
+        this.imageOverlay = new Overlay(this.$.find('.post-image img'));
     }
 
     postCancel() {
@@ -83,21 +140,25 @@ module.exports = class PostComponent {
             airMode: true 
         });
         this.editMode = true;
+        this.hasImage || this.$.find('.post-change-image').show();
         this.$.find('.post-edit').hide();
         this.$.find('.post-delete').hide();
         this.$.find('.post-commit').show();
         this.$.find('.post-cancel').show();
         this.$.find('.post-share').hide();
+        this.displayImageOverlay();
     }
 
     leaveEditMode() {
         this.$.find('.post-editable').summernote('destroy');
         this.editMode = false;
+        this.$.find('.post-change-image').hide();
         this.$.find('.post-commit').hide();
         this.$.find('.post-cancel').hide();
         this.$.find('.post-edit').show();
         this.$.find('.post-delete').show();
         this.$.find('.post-share').show();
+        this.hideImageOverlay();
     }
 
     undoDelete() {

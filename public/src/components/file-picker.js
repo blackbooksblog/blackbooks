@@ -1,4 +1,9 @@
-function FilePicker (el) {
+function FilePicker (el, options) {
+    this.options = Object.assign({}, {
+        noRedIcon: false,
+        onChange: null 
+    }, options);
+
     this.el = el;
     this.setup();
     this.deinit = () => {
@@ -7,6 +12,11 @@ function FilePicker (el) {
 }
 
 FilePicker.prototype.setReady = function(on) {
+
+    if (this.options.noRedIcon) {
+        return;
+    }
+
     if (on) {
         this.redDot = $('<div class="red-dot"></div>');
         this.redDot.css({
@@ -26,6 +36,9 @@ FilePicker.prototype.setup = function () {
     this.hiddenFile = $('<input type="file">');
     
     services.store.get('file').subscribe('id', id => {
+        if (this.options.onChange) {
+            return this.options.onChange(id);
+        }
         this.setReady(!!id);
     })
 
@@ -50,6 +63,6 @@ FilePicker.prototype.open = function () {
     this.hiddenFile.trigger('click');
 }
 
-module.exports = (e) => {
-    return new FilePicker(e);
+module.exports = (e, opts) => {
+    return new FilePicker(e, opts);
 }

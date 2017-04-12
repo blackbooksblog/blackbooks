@@ -30,6 +30,23 @@ post.update = (id, title, body) => {
     })
 }
 
+post.changeImage = (_id, imageId, cb = () => {}) => {
+    console.log('post.changeImage');
+
+    let object = {
+        _id, imageId 
+    };
+
+    let label = imageId ? 'updated' : 'removed';
+
+    return Vue.http.post('/api/posts/change-image', object).then(res => {
+        services.show.success(`Post image was successfully ${label}`);
+        services.store.get('posts').notify('old-post', _id);
+    }).catch(err => {
+        services.show.error(err.body.error);
+    })
+}
+
 post.delete = (_id, cb = () => {}) => {
 
     console.log('post.delete');

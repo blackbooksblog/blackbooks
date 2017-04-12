@@ -27,3 +27,5 @@ let services = require('./services');
 
 window.services = services;
 window.services.load();
+
+window.overlay = require('./components/overlay');

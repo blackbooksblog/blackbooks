@@ -20,6 +20,10 @@
     margin-bottom: 15px;
 }
 
+.post-image {
+    position: relative;
+}
+
 .post-image img {
     max-width: 100%;
 }

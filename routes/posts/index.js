@@ -21,6 +21,22 @@ router.post('/create', adminOnly, async function (req, res){
     });
 }.catchy());
 
+router.post('/change-image', adminOnly, async function(req, res) {
+
+    var postId = req.body._id;
+    var imageId = req.body.imageId;
+
+    let post = await Entity.get(Post, postId);
+
+    post.src.picture = imageId;
+    await post.save();
+
+    res._json({
+        yeah: true 
+    });
+
+}.catchy());
+
 router.post('/update', adminOnly, async function (req, res){
     console.log('here');
     
@@ -29,7 +45,6 @@ router.post('/update', adminOnly, async function (req, res){
 
     let entity = Entity.fromJSON(req.body, Post);
     
-
     let post = await Entity.get(Post, entity.src._id);
 
     if (!post) {
