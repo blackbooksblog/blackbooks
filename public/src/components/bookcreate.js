@@ -1,5 +1,5 @@
 let linkPicker = require('./link');
-
+let filePicker = require('./file-picker');
 module.exports = class CreateBookComponent {
 
     static get inject() {
@@ -14,6 +14,7 @@ module.exports = class CreateBookComponent {
         this.Modal = Modal;
         this.$ = $;
         this.linkpicker = linkPicker(this.$.find('.book-attach-link'));
+        this.filepicker = filePicker($.find('.book-file-picker'));
         setTimeout(_ => this.setupEvents(), 0);
     }
 

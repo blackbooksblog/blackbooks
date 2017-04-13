@@ -2,7 +2,7 @@ var post = {};
 
 post.submit =  (name, body, link, cb) => {
     let object = {
-        name, body, link
+        name, body, link, picture: services.store.get('file').get('id')
     };
 
     return Vue.http.post('/api/books/create', object).then((res) => {
