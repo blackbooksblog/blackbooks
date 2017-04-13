@@ -45,6 +45,9 @@ app.listen(config.PORT, () => {
     console.log('app is listening on http://localhost:' + config.PORT);
 });
 
+var startupSetup = require('./startup');
+startupSetup();
+
 Array.prototype.mapAsync = async function (cb) {
     let i = 0;
     let newArr = [];

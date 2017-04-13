@@ -1,9 +1,12 @@
 
 
 <div class="single-post drop-shadow {{#post.link}}book-post{{/post.link}}" postid="{{post._id}}" component="post">
+    
+    {{^post.bio}}
     <div class="post-header">
         <div class="post-date">{{post.date}}</div>
     </div>
+    {{/post.bio}}
 
     <div class="post-editable">
     <div class="post-title">{{post.title}}</div>
@@ -34,19 +37,23 @@
 
     <hr>
     <div class="post-dialog">
+        {{^post.bio}}
         <div class="post-share pointer post-action">
             <i class="fa fa-share post-icon " aria-hidden="true"></i>
             <span>Share</span>
         </div>
+        {{/post.bio}}
         {{#user.admin}}
         <div class="pointer post-action post-edit ">
             <i class="fa fa-pencil post-icon pointer" aria-hidden="true"></i>
             <span>Edit</span>    
         </div>
+        {{^post.bio}}
         <div class="pointer post-action post-delete ">
             <i class="fa fa-trash post-icon pointer" aria-hidden="true"></i>
             <span>Delete</span>
         </div>
+        {{/post.bio}}
 
         <span style="display: none" class="post-commit pointer post-action">Save Changes</span>
         <span style="display: none" class="post-change-image pointer post-action">Add Image</span>

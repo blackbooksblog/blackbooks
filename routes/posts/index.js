@@ -94,7 +94,8 @@ router.post('/', async function(req, res) {
     let posts = await Collection.all(Post, {
         query: {
             deleted: {$exists: false},
-            book: {$exists: false}
+            book: {$exists: false},
+            bio: {$exists: false}
         },
         limit: count,
         sort: {
@@ -110,7 +111,9 @@ router.post('/', async function(req, res) {
 
 router.post('/count', async function(req, res) {
     let count = await Collection.count(Post, {
-        deleted: {$exists: false}
+        deleted: {$exists: false},
+        book: {$exists: false},
+        bio: {$exists: false}
     });
 
     res._json({count: count});

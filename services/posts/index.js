@@ -6,13 +6,27 @@ module.exports = class Posts {
     }
 
     static async getProcessed(_id) {
-        let post = await Posts.getById(_id);
+        let post = undefined;
+        let admin = undefined;
+        if (_id == 'bio') {
+            post = await db.collection.findOne(db.entities.Post, {bio: true});
+            admin = await db.collection.findOne(db.entities.User, {admin: true});
+        } else {
+            post = await Posts.getById(_id);
+        }
+
+        
+
         if (!post) {
             throw new Error('Post not found');
         }
 
-        post.date = timeAgo(post.date);
-        post.body = post.text;
+        post.date = timeAgo(post.date || 0);
+        post.body = post.text || 'Your bio...';
+        
+        if (_id == 'bio') {
+            post.title = post.title || post.name || admin.name;
+        }
 
         //TODO: get likes and shares
 

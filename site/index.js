@@ -28,4 +28,10 @@ router.get('/books', (req, res) => {
     res.render('books');
 })
 
+router.get('/bio', (req, res) => {
+    res.render('bio', {
+        user: req.user
+    });
+})
+
 module.exports = router;

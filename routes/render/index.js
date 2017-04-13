@@ -20,6 +20,8 @@ router.all('/post/:id', async function(req, res) {
 
     let id = req.params.id;
 
+    
+
     let post = await postsService.getProcessed(id);
 
     console.log(post);
