@@ -110,6 +110,8 @@ post.older = (oldest, query, count) => {
         return Vue.http.post('/api/posts/older', {
             oldest, query, count
         })
+    } else {
+        return Promise.resolve([]);
     }
 }
 
