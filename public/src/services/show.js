@@ -73,7 +73,7 @@ show.createProgressLine = function() {
         svgStyle: {width: '100%', height: '100%', position: 'absolute'},
     });
 
-    progressBars[progressBars.last].set(0.05);
+    progressBars[progressBars.last].set(0.0);
 
     return progressBars.last++;
 }
