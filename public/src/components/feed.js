@@ -13,6 +13,8 @@ module.exports = class FeedComponent {
         console.log('feed construct');
         this.Post = Post;
         this.$ = $;
+        this.singlePost = this.$.parent().attr('single');
+        console.log('no posts = ', this.noPosts);
         this.offset = 0;
         this.scrollTop = 0;
         this.count = 10;
@@ -25,19 +27,26 @@ module.exports = class FeedComponent {
 
         this.renderShowMore(true);
 
-        services.store.get('posts').subscribe('new_post', id => {
-            this.renderInFront(id);
-        })
-        services.store.get('posts').subscribe('show-more', val => {
-            this.renderShowMore(val);
-        })
-        services.store.get('posts').subscribe('old-post', val => {
-            this.renderPost(val);
-        })
+        if (!this.singlePost) {
+            services.store.get('posts').subscribe('new_post', id => {
+                this.renderInFront(id);
+            })
+            services.store.get('posts').subscribe('show-more', val => {
+                this.renderShowMore(val);
+            })
+            services.store.get('posts').subscribe('old-post', val => {
+                this.renderPost(val);
+            })
+        } else {
+            this.renderPost(this.singlePost);
+        }
         
     }
 
     renderShowMore(val) {
+        if (this.singlePost) {
+            val = false;
+        }
         if (!val) {
             this.showMore && this.showMore.detach();
             this.showMore = null;

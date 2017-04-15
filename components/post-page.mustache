@@ -35,9 +35,11 @@
         
     </div>
     <div class="col-xs-8 feed-panel">
-        
-        <div class="place-feed">
-            <div place="post/{{params.postId}}"></div>
+
+        <div class="place-count" place="text" text="Post"></div>
+
+        <div class="place-feed" place="feed" single="{{params.postId}}">
+
         </div>
     </div>
     

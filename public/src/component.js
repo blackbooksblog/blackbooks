@@ -10,9 +10,9 @@ const components = require('./components');
 
 Component.instances = [];
 
-Component.load = function(componentName, options) {
+Component.load = function(componentName, options = {}) {
 
-    return new Component(Vue.http.get('/api/render/' + componentName), componentName, options);
+    return new Component(Vue.http.get('/api/render/' + componentName + '?' + options.attributes || ""), componentName, options);
 }
 
 Component.prototype.apply = function (element) {

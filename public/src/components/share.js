@@ -56,7 +56,7 @@ module.exports = class ShareMenu {
     }
 
     copyFacebook() {
-        services.share.click('https://facebook.com/sharer/sharer.php?app_id=797267377076091&display=popup&ref=plugin&src=share_button&u=' + encodeURI(this.getPostLink()));
+        services.share.click('https://facebook.com/sharer/sharer.php?&u=' + encodeURI(this.getPostLink()));
     }
 
     copyTwitter() {

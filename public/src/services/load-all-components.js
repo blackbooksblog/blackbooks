@@ -6,6 +6,10 @@ let loadAll = function () {
     let all = $('[place]');
     all.each((index, el) => {
         let componentName = $(el).attr('place');
+        let attributes = Array.from($(el).get(0).attributes).map(_ => {
+            return `${_.name}=${_.value}`;
+        }).join('&');
+
         let alreadyLoaded = loadedComponents[componentName];
 
         if (alreadyLoaded) return;
@@ -15,7 +19,9 @@ let loadAll = function () {
 
         if (componentName.indexOf('post-id') == 0) return;
 
-        Component.load(componentName).apply($(el));
+        Component.load(componentName, {
+            attributes: attributes
+        }).apply($(el));
     });
 };
 
