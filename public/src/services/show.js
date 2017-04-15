@@ -51,6 +51,38 @@ let progressBars = {
     last: 0
 }
 
+show.createProgressLine = function() {
+    let div = $('<div class="progress-line">');
+
+    let blackWindow = $('.black-window');
+    let body = $('body');
+
+    if (blackWindow.length) {
+        div.appendTo(blackWindow.last());
+    } else {
+        div.appendTo(body);
+    }
+
+    progressBars[progressBars.last] = new ProgressBar.Line(div.get(0),  {
+        strokeWidth: 2,
+        easing: 'easeInOut',
+        duration: 500,
+        color: '#FFEA82',
+        trailColor: '#eee',
+        trailWidth: 1,
+        svgStyle: {width: '100%', height: '100%'},
+        from: {color: '#FFEA82'},
+        to: {color: '#ED6A5A'},
+        step: (state, bar) => {
+            bar.path.setAttribute('stroke', state.color);
+        }
+    });
+
+    progressBars[progressBars.last].set(0.05);
+
+    return progressBars.last++;
+}
+
 show.createProgressCircle = function(el) {
 
     let div = $('<div class="animated-progress">');
@@ -86,7 +118,22 @@ show.progress = function(id, progress) {
         return null;
     }
 
-    line.animate(progress);
+    line.animate(progress, {}, _ => {
+        if (progress == 1) {
+            show.destroy(id);
+        }
+    });
+}
+
+show.destroy = function(id) {
+    try {
+        progressBars[id].destroy();
+        progressBars[id] = null;
+        $('.animated-progress').detach();
+        $('.progress-line').detach();
+    } catch(e) {
+
+    }
 }
 
 module.exports = show;

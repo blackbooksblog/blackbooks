@@ -1,13 +1,13 @@
 let mod = {};
 
-mod.send = function (file, id, el) {
+mod.send = function (file, id) {
     console.log('id = ', id);
     let form = new FormData();
     form.append('file', file);
 
-    console.log(el);
 
-    let animatedProgress = services.show.createProgressCircle(el);
+
+    let animatedProgress = services.show.createProgressLine();
     Vue.http.post('/api/images/save', form, {
         progress(e) {
             if (e.lengthComputable) {

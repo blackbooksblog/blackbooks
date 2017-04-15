@@ -173,3 +173,11 @@ input:-webkit-autofill {
     animation: rotating 2s linear infinite;
     transform-origin: 50% 50%;
 }
+
+
+.progress-line {
+    top: 0;
+    height: 5px;
+    left: 0;
+    width: 100vw;
+}
