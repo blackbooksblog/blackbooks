@@ -88,7 +88,7 @@ router.post('/save',async function (req, res) {
 router.all('/:id',  async function (req, res) {
     let stream = await getFile(req.params.id);
     
-    res.header('Content-type', 'image/jpeg');
+    res.header('Content-type', 'image/png');
     stream.pipe(res);
 }.catchy());
 
