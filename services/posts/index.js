@@ -11,6 +11,9 @@ module.exports = class Posts {
         if (_id == 'bio') {
             post = await db.collection.findOne(db.entities.Post, {bio: true});
             admin = await db.collection.findOne(db.entities.User, {admin: true});
+            if (!admin) {
+                throw new Error('Bio cannot be shown until at least one user is registered');
+            }
         } else {
             post = await Posts.getById(_id);
         }

@@ -44,7 +44,11 @@ module.exports = class User extends Entity {
     async beforeInsert() {
         this.src.password_hash = await Hash.hash(this.src.password);
         this.src.tokens = [];
-        this.src.admin = (await this.count()) ? false : true;
+        let count = await this.count();
+        this.src.admin = (count) ? false : true;
+
+        
+
         delete this.src.password;
     }
 
