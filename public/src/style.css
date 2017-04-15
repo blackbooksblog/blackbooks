@@ -180,4 +180,5 @@ input:-webkit-autofill {
     height: 5px;
     left: 0;
     width: 100vw;
+    position: absolute;
 }

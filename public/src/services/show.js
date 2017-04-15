@@ -64,18 +64,13 @@ show.createProgressLine = function() {
     }
 
     progressBars[progressBars.last] = new ProgressBar.Line(div.get(0),  {
-        strokeWidth: 2,
+        strokeWidth: 1,
         easing: 'easeInOut',
         duration: 500,
-        color: '#FFEA82',
+        color: '#42404b',
         trailColor: '#eee',
         trailWidth: 1,
-        svgStyle: {width: '100%', height: '100%'},
-        from: {color: '#FFEA82'},
-        to: {color: '#ED6A5A'},
-        step: (state, bar) => {
-            bar.path.setAttribute('stroke', state.color);
-        }
+        svgStyle: {width: '100%', height: '100%', position: 'absolute'},
     });
 
     progressBars[progressBars.last].set(0.05);
