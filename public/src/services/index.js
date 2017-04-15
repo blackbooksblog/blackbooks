@@ -7,5 +7,7 @@ module.exports = {
     file: require('./file'),
     post: require('./post'),
     share: require('./share'),
-    book: require('./book')
+    book: require('./book'),
+    search: require('./search'),
+    go: require('./go')
 };

@@ -88,3 +88,46 @@ input:-webkit-autofill {
 .pointer {
     cursor: pointer;
 }
+
+.results-window {
+    width: 250px;
+    min-height: 50px;
+    position: absolute;
+    background: white;
+}
+
+.search-result {
+    width: 250px;
+    height: 50px;
+    font-family: Signika;
+}
+
+.search-result:hover {
+    background-color: #eee;
+}
+
+.search-type {
+
+    line-height: 50px;
+    height: 50px;
+    width: 75px;
+    color: #ccc;
+    text-align: center;
+     float: left;
+}
+
+.search-result .search-title {
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    clear: fix;
+}
+
+.search-unsuccessful {
+    width: 100%;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #ccc;
+}
