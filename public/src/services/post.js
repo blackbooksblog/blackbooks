@@ -106,9 +106,11 @@ post.count = (query) => {
 }
 
 post.older = (oldest, query, count) => {
-    return Vue.http.post('/api/posts/older', {
-        oldest, query, count
-    })
+    if (oldest) {
+        return Vue.http.post('/api/posts/older', {
+            oldest, query, count
+        })
+    }
 }
 
 post.getOlder = (oldest, query, count) => {
