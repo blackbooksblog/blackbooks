@@ -94,6 +94,9 @@ post.older = (oldest, query, count) => {
 
 post.getOlder = (oldest, query, count) => {
     post.older(oldest,query,count).then((res) => {
+        if (!res) {
+            services.store.get('books').notify('show-more', false);
+        }
         if (res.body.body.posts.length < count) {
             services.store.get('books').notify('show-more', false);
         }

@@ -111,12 +111,15 @@ post.older = (oldest, query, count) => {
             oldest, query, count
         })
     } else {
-        return Promise.resolve([]);
+        return Promise.resolve(null);
     }
 }
 
 post.getOlder = (oldest, query, count) => {
     post.older(oldest,query,count).then((res) => {
+        if (!res) {
+            return services.store.get('posts').notify('show-more', false);
+        }
         if (res.body.body.posts.length < count) {
             services.store.get('posts').notify('show-more', false);
         }
