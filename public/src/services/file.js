@@ -5,9 +5,9 @@ mod.send = function (file, id) {
     let form = new FormData();
     form.append('file', file);
     Vue.http.post('/api/images/save', form, {
-        xhr: {
-            onprogress: _ => {
-                console.log(_);
+        progress(e) {
+            if (e.lengthComputable) {
+                console.log(e.loaded / e.total);
             }
         }
     }).then(function(res){
