@@ -117,10 +117,12 @@ module.exports = class CreateComponent {
         this.$.find('.new-post-submit').on('click', (e) => {
             let title = this.getTitle();
             let body = this.getBody();
-            services.post.submit(title, body, _ => {
+            let picture = this.filepicker.getPicture();
+            services.post.submit(title, body, picture, _ => {
                 this.input.val('');
                 this.$.find('.new-post-editor').summernote('empty');
                 this.createHint();
+                this.filepicker.clear();
                 setTimeout(_ => this.a && this.a.destroyModal(), 2000);
             })
         })

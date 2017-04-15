@@ -1,4 +1,5 @@
 function FilePicker (el, options) {
+    this.id = services.file.getId();
     this.options = Object.assign({}, {
         noRedIcon: false,
         onChange: null 
@@ -8,7 +9,25 @@ function FilePicker (el, options) {
     this.setup();
     this.deinit = () => {
         this.el.detach();
-    }
+    };
+
+    
+
+    console.log('file picker constructor id', this.id);
+}
+
+FilePicker.prototype.getPicture = function() {
+    let id = this.id;
+    console.log(id);
+    let pic = services.store.get('file').get(`id-${id}`);
+    console.log('pic', pic);
+
+    return pic;
+}
+
+FilePicker.prototype.clear = function() {
+    let id = this.id;
+    services.store.get('file').set(`id-${id}`, null);
 }
 
 FilePicker.prototype.setReady = function(on) {
@@ -34,8 +53,8 @@ FilePicker.prototype.setReady = function(on) {
 
 FilePicker.prototype.setup = function () {
     this.hiddenFile = $('<input type="file">');
-    
-    services.store.get('file').subscribe('id', id => {
+    let thisid = this.id;
+    services.store.get('file').subscribe(`id-${thisid}`, id => {
         if (this.options.onChange) {
             return this.options.onChange(id);
         }
@@ -55,7 +74,7 @@ FilePicker.prototype.setup = function () {
         // only one for now
         let file = this.files[0];
 
-        services.file.send(file);
+        services.file.send(file, thisid);
     })
 }
 

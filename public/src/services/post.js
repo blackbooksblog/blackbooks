@@ -1,16 +1,17 @@
 var post = {};
 
-post.submit =  (name, body, cb) => {
+post.submit =  (name, body, picture, cb) => {
     let object = {
-        name, body, picture: services.store.get('file').get('id')
+        name, body, picture
     };
 
     return Vue.http.post('/api/posts/create', object).then((res) => {
         services.show.success("Success");
         services.store.get('posts').notify('new_post', res.body.body._id);
-        services.store.get('file').set('id', null);
+        // services.store.get('file').set('id', null);
         cb && cb();
     }).catch(err => {
+        console.log(err);
         services.show.error(err.body.error);
     });
 }
