@@ -12,6 +12,7 @@ router.all('/:id', function (req, res) {
             {name: 'Home', link: '/go/home'},
             {name: 'Books', link: '/go/books'},
             {name: 'Bio', link:'/go/bio'},
+            {name: 'Use this platform', link:'https://github.com/blackbooksblog/blackbooks/'}
         ]
     });
 }.catchy());
