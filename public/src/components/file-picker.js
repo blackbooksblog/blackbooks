@@ -54,6 +54,7 @@ FilePicker.prototype.setReady = function(on) {
 FilePicker.prototype.setup = function () {
     this.hiddenFile = $('<input type="file">');
     let thisid = this.id;
+    let self = this;
     services.store.get('file').subscribe(`id-${thisid}`, id => {
         if (this.options.onChange) {
             return this.options.onChange(id);
@@ -74,7 +75,7 @@ FilePicker.prototype.setup = function () {
         // only one for now
         let file = this.files[0];
 
-        services.file.send(file, thisid);
+        services.file.send(file, thisid, self.el);
     })
 }
 

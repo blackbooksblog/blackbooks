@@ -1,5 +1,7 @@
 let show = {}
 
+var ProgressBar = require('progressbar.js')
+
 function showMessage(message, color, background) {
     let error = $('<div/>').addClass('error-message');
     error.css({
@@ -45,6 +47,46 @@ show.success = function (message) {
     return showMessage(message, '#fff', '#59CF85');
 }
 
+let progressBars = {
+    last: 0
+}
 
+show.createProgressCircle = function(el) {
+
+    let div = $('<div class="animated-progress">');
+
+    div.appendTo(el);
+
+    div.css({
+        position:"absolute",
+        width: 30,
+        height: 30,
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%,-50%)',
+    });
+
+
+    progressBars[progressBars.last] = new ProgressBar.Circle(div.get(0), {
+        color: '#eba8a2',
+        trailColor: '#eee',
+        strokeWidth: 4,
+        duration: 500,
+        easing: 'easeInOut'
+    });
+
+    progressBars[progressBars.last].set(0.05);
+
+    return progressBars.last++;
+}
+
+show.progress = function(id, progress) {
+    var line = progressBars[id];
+    if (!line) {
+        return null;
+    }
+
+    line.animate(progress);
+}
 
 module.exports = show;
