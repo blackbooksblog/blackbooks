@@ -30,6 +30,7 @@
     "png-stream": "^1.0.5",
     "resizer-stream": "^1.0.1",
     "rfr": "^1.2.3",
+    "sharp": "^0.17.3",
     "then-mongo": "^2.3.2",
     "uuid": "^3.0.1"
   }

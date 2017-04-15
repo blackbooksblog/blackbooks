@@ -8,36 +8,39 @@ var PNGEncoder = require('png-stream/encoder');
 var JPGDecoder = require('jpg-stream/decoder');
 var fsp = require('fs-promise');
 const fileType = require('file-type');
+const sharp = require('sharp');
 
 let processFile = async function(filepath, filename, mimetype) {
-    let stream = fs.createReadStream(filepath);
-    let newFile = fs.createWriteStream(filepath + '-resized');
-    let type = (_ => {
-        if (mimetype.endsWith('png') || filename.endsWith('.png')) {
-            return 'png';
-        }
+    // let stream = fs.createReadStream(filepath);
+    // let newFile = fs.createWriteStream(filepath + '-resized');
+    // let type = (_ => {
+    //     if (mimetype.endsWith('png') || filename.endsWith('.png')) {
+    //         return 'png';
+    //     }
 
-        if (mimetype.endsWith('jpeg') || mimetype.endsWith('jpg') || filename.endsWith('.jpg') || filename.endsWith('.jpeg')) {
-            return 'jpg';
-        }
+    //     if (mimetype.endsWith('jpeg') || mimetype.endsWith('jpg') || filename.endsWith('.jpg') || filename.endsWith('.jpeg')) {
+    //         return 'jpg';
+    //     }
 
-        throw new Error("Couldn't guess type of image. It should be JPG or PNG");
-    })();
+    //     throw new Error("Couldn't guess type of image. It should be JPG or PNG");
+    // })();
 
-    let decoder = type == "png" ? PNGDecoder : JPGDecoder;
-    let encoder = PNGEncoder;
+    // let decoder = type == "png" ? _ => new PNGDecoder : _ => new JPGDecoder({width: 500, height: 500});
+    // let encoder = PNGEncoder;
 
-    stream.pipe(new decoder).pipe(resize({ width: 500, height: 500, fit: true })).pipe(new encoder).pipe(newFile);
+    // stream.pipe(new decoder).pipe(resize({ width: 500, height: 500, fit: true })).pipe(new encoder).pipe(newFile);
 
-    let streamClose = async function() {
-        return new Promise(resolve => {
-            newFile.on('close', _ => {
-                resolve();
-            });
-        });
-    };
+    // let streamClose = async function() {
+    //     return new Promise(resolve => {
+    //         newFile.on('close', _ => {
+    //             resolve();
+    //         });
+    //     });
+    // };
 
-    await streamClose();
+    await sharp(filepath).resize(600, 500).toFile(filepath + '-resized');
+
+    // await streamClose();
     return;
 }
 
