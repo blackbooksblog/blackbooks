@@ -48,7 +48,9 @@ module.exports = class Posts {
             _id: {
                 $lt: post._id
             },
-            deleted: {$exists: false}
+            deleted: {$exists: false},
+            book: {$exists: false},
+            bio: {$exists: false}
         })).limit(count);
 
         return older;
