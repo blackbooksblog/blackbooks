@@ -6,3 +6,4 @@ yarn.lock
 yarn-error.log
 images/**
 public/yarn.lockyarn.lock
+bash.sh
