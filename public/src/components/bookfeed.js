@@ -29,7 +29,7 @@ module.exports = class FeedComponent {
             this.renderInFront(id);
         })
         services.store.get('books').subscribe('show-more', val => {
-            // this.renderShowMore(val);
+            this.renderShowMore(val);
         })
         services.store.get('books').subscribe('old-post', val => {
             this.renderPost(val);
@@ -46,12 +46,12 @@ module.exports = class FeedComponent {
         if (this.showMore) {
             return;
         }
-        // this.showMore = $('<div class="feed-show-more">Show More</div>');
-        // this.showMore.on('click', e => {
-            // services.post.getOlder(services.book.oldest(), {}, 10);
-        // });
+        this.showMore = $('<div class="feed-show-more">Show More</div>');
+        this.showMore.on('click', e => {
+            services.book.getOlder(services.book.oldest(), {}, 10);
+        });
 
-        // this.$.append(this.showMore);
+        this.$.append(this.showMore);
     }
 
     renderInFront(id) {

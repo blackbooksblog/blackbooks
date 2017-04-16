@@ -102,7 +102,7 @@ router.post('/count', async function(req, res) {
 }.catchy());
 
 router.post('/older', async function(req, res) {
-    let posts = await postsService.older(req.body.oldest, req.body.query, req.body.count || 10);
+    let posts = await postsService.olderBooks(req.body.oldest, req.body.query, req.body.count || 10);
 
     res._json({posts: posts.reverse().map(post => {
         return post._id.toString()

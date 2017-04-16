@@ -53,4 +53,23 @@ module.exports = class Posts {
 
         return older;
     }
+
+    static async olderBooks(oldest, query, count) {
+        let post = await Posts.getById(oldest);
+        if (!post) {
+            throw new Error('Post not found');
+        }
+
+        console.log(post);
+
+        let older = await db.collection.find(db.entities.Post, Object.assign({}, query, {
+            _id: {
+                $lt: post._id
+            },
+            deleted: {$exists: false},
+            book: true 
+        })).limit(count);
+
+        return older;
+    }
 }
