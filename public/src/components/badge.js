@@ -1,3 +1,5 @@
+let overlay = require('./avatar-overlay');
+
 module.exports = class BadgeComponent {
     constructor($) {
         this.$ = $;
@@ -6,6 +8,9 @@ module.exports = class BadgeComponent {
 
     setupEvents() {
         this.$.filter('.logout').on('click', this.logout);
+
+        this.overlay = new overlay(this.$.find('.profile-image'));
+        this.overlay.show();
     }
 
     logout() {

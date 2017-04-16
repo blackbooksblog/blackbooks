@@ -22,6 +22,16 @@ user.logout = function() {
     
 }
 
+user.avatar = function(fileid) {
+    Vue.http.post('/api/settings/avatar', {fileid}).then(() => {
+        services.show.success('Avatar has been updated').after(_ => {
+            services.reload();
+        });
+    }).catch(e => {
+        services.show.error(e.body.error);
+    })
+}
+
 user.register = function (login, password, name) {
     Vue.http.post('/api/auth/register', {
         login: login,

@@ -10,8 +10,9 @@ var images = require('./images');
 var auth = require('./auth');
 var books = require('./books');
 var search = require('./search');
+var settings = require('./settings');
 
-var routers = [posts, render, images, auth, books, search];
+var routers = [posts, render, images, auth, books, search, settings];
 routers.map(r => {
     if (r.inject) {
         r.services = {};
@@ -29,6 +30,7 @@ router.use('/images', images);
 router.use('/auth', auth);
 router.use('/books', books);
 router.use('/search', search);
+router.use('/settings', settings);
 
 
 module.exports = router;

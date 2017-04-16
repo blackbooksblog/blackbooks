@@ -1,6 +1,11 @@
 <div class="profile-badge drop-shadow">
     <div class="profile-image">
+        {{#user.avatar}}
+        <img height="50" width="50" src="/api/images/{{user.avatar}}" />
+        {{/user.avatar}}
+        {{^user.avatar}}
         <img height="50" width="50" src="/api/images/test" />
+        {{/user.avatar}}
     </div>
 
     <div class="profile-info">

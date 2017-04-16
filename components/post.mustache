@@ -11,12 +11,22 @@
     <div class="post-editable">
     <div class="post-title">{{post.title}}</div>
 
+    {{#post.bio}}
+        {{#post.picture}}
+        <div class="post-image">
+            
+            <img src="/api/images/{{post.picture}}"></img>
+
+        </div>
+        {{/post.picture}}
+    {{/post.bio}}
     
 
     <div class="post-body">
         {{& post.body}}
     </div>
     </div>
+    {{^post.bio}}
     {{#post.picture}}
     <div class="post-image">
         
@@ -24,6 +34,8 @@
 
     </div>
     {{/post.picture}}
+
+    {{/post.bio}}
 
     
 
